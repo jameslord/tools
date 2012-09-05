@@ -1,0 +1,13 @@
+
+if [ -z  $1 ]; then
+echo "input where you would install nginx, recomment $HOME/ins/ins_nginx"
+exit;
+fi
+
+git clone git://github.com/jameslord/libevent.git
+git clone git://github.com/jameslord/nginx.git
+cd libevent
+sleep 3 &&./autogen.sh &&  ./configure --prefix=$1 && make && make install
+cd ..
+cd nginx
+sleep 3 &&  ./auto/configure --prefix=$1 --without-http_rewrite_module && make && make install

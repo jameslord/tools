@@ -7,10 +7,12 @@ jdk() {
 		echo $jdk_time
 		echo "jdk extracted within $";
 	fi
+
+	mv jdk1.6.0_35 $2/
 }
 
 maven() {
-	tar xf $1/apache-maven-3.0.4-bin.tar.gz;
+	tar xf $1/apache-maven-3.0.4-bin.tar.gz -C $2;
 }
 
 build_java_env() {
@@ -28,10 +30,14 @@ build_java_env() {
 	mkdir monica;
 	cd monica;
 
-	maven $cdir;
+	TOOLS=`pwd`/gov/tools;
+	BIKE=$TOOLS/bike
+	mkdir -p $BIKE
+
+	maven $cdir $BIKE;
 
 	# extract jdk
-	jdk $cdir;
+	jdk $cdir $TOOLS;
 
 }
 

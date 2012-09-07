@@ -1,0 +1,6 @@
+
+cdir=`pwd`
+JAVA_HOME=$cdir/gov/tools/jdk1.6.0_35/
+MAVEN_HOME=$cdir/gov/tools/bike/apache-maven-3.0.4/
+exe_path=$JAVA_HOME/bin;$MAVEN_HOME/bin
+PATH=$exe_path:$PATH

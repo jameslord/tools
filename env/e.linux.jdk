@@ -1,0 +1,38 @@
+
+jdk() {
+	chmod 777 $1/jdk-6u35-linux-i586.bin
+	echo $1
+	jdk_time=`time $1/jdk-6u35-linux-i586.bin > /dev/null`
+	if [ $? = 0 ]; then
+		echo $jdk_time
+		echo "jdk extracted within $";
+	fi
+}
+
+maven() {
+	tar xf $1/apache-maven-3.0.4-bin.tar.gz;
+}
+
+build_java_env() {
+	if [ -z $1 ]; then
+		echo "input the path where packages resides";
+		exit 1;
+	fi
+	# go to the dir, which include all the packages needed to buidl java env
+	cd $1;
+        cdir=`pwd`
+	# test if this directory exists, if yes, delete it
+	if [ -d monica ]; then
+		rm monica -rf
+	fi
+	mkdir monica;
+	cd monica;
+
+	maven $cdir;
+
+	# extract jdk
+	jdk $cdir;
+
+}
+
+build_java_env $1;

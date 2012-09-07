@@ -2,5 +2,6 @@
 cdir=`pwd`
 JAVA_HOME=$cdir/gov/tools/jdk1.6.0_35/
 MAVEN_HOME=$cdir/gov/tools/bike/apache-maven-3.0.4/
-exe_path=$JAVA_HOME/bin:$MAVEN_HOME/bin
+SONATYPE_HOME=$cdir/gov/tools/bike/sonatype/
+exe_path=$JAVA_HOME/bin:$MAVEN_HOME/bin:$SONATYPE_HOME/nexus-2.1.2/bin
 PATH=$exe_path:$PATH

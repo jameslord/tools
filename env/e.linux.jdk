@@ -15,6 +15,11 @@ maven() {
 	tar xf $1/apache-maven-3.0.4-bin.tar.gz -C $2;
 }
 
+nexus() {
+	[ -d $2/sonatype ] || mkdir -p $2/sonatype
+	tar xf $1/nexus-2.1.2-bundle.tar.gz -C $2/sonatype;
+}
+
 build_java_env() {
 	if [ -z $1 ]; then
 		echo "input the path where packages resides";
@@ -38,14 +43,14 @@ build_java_env() {
 	mkdir -p $BIKE
 
 	maven $cdir $BIKE;
-
+	nexus $cdir $BIKE;
 	# extract jdk
 	jdk $cdir $TOOLS;
 
 }
 
 #  //////    no space is allows around =
-package_names=("apache-maven-3.0.4-bin.tar.gz" "jdk-6u35-linux-i586.bin" );
+package_names=("apache-maven-3.0.4-bin.tar.gz" "jdk-6u35-linux-i586.bin" "nexus-2.1.2-bundle.tar.gz");
 download_dir=$HOME/soft
 download_packages() {
 

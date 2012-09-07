@@ -30,6 +30,9 @@ build_java_env() {
 	mkdir monica;
 	cd monica;
 
+	wget https://raw.github.com/jameslord/tools/master/env/luna_java/chenv_linux_jdk -O chenv
+	chmod 777 chenv
+
 	TOOLS=`pwd`/gov/tools;
 	BIKE=$TOOLS/bike
 	mkdir -p $BIKE

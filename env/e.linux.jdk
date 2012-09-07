@@ -1,4 +1,8 @@
 
+
+wget0() {
+	wget -c -t 10 --read-timeout 5 $@
+}
 jdk() {
 	chmod 777 $1/jdk-6u35-linux-i586.bin
 	echo $1
@@ -28,14 +32,17 @@ build_java_env() {
 	# go to the dir, which include all the packages needed to buidl java env
 	cd $1;
         cdir=`pwd`
+
 	# test if this directory exists, if yes, delete it
-	if [ -d monica ]; then
-		rm monica -rf
-	fi
-	mkdir monica;
+	# since network connection maybe not good, so it's better not to delte packages, but it is permitted to delete extracted files
+	#if [ -d monica ]; then
+	#	rm monica -rf
+	#fi
+
+	[ -d monica ] || mkdir monica;
 	cd monica;
 
-	wget https://raw.github.com/jameslord/tools/master/env/luna_java/chenv_linux_jdk -O chenv
+	wget0 https://raw.github.com/jameslord/tools/master/env/luna_java/chenv_linux_jdk -O chenv
 	chmod 777 chenv
 
 	TOOLS=`pwd`/gov/tools;
@@ -70,7 +77,7 @@ download_packages() {
 	for item in ${package_names[*]}
 	do
 		echo $item;
-		wget $1/$item -O $item;
+		wget0 $1/$item -O $item;
 	done
 
 }

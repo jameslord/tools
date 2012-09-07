@@ -44,4 +44,53 @@ build_java_env() {
 
 }
 
-build_java_env $1;
+#  //////    no space is allows around =
+package_names=("apache-maven-3.0.4-bin.tar.gz" "jdk-6u35-linux-i586.bin" );
+download_dir=$HOME/soft
+download_packages() {
+
+	if [ -z $1 ];then 
+		echo "must specify base url";
+		exit 1;
+	fi
+
+	if [ -d $download_dir ]; then
+		echo "dir exists";
+	# no colon here ///
+	else
+		mkdir -p $download_dir;
+	fi
+	cd $download_dir;
+
+	for item in ${package_names[*]}
+	do
+		echo $item;
+		wget $1/$item -O $item;
+	done
+
+}
+
+install_method() {
+	if [ -z $1 ]; then
+		echo "please choose install method, local | remote";
+		exit 1;
+	fi
+
+	if [ $1 = -h ]; then
+		echo "$1 install method local | remote"
+		# local storage dir is ~/software
+		echo "$2 local path of package dir | remote base url";
+	fi
+
+	if [ $1 = local ]; then
+		build_java_env $2;
+	elif [ $1 = remote ]; then
+	# package list should be separated
+		echo "remote"
+		download_packages $2;
+		build_java_env $download_dir;
+	fi
+}
+
+install_method $1 $2
+#download_packages $1

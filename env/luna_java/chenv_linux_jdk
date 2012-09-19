@@ -1,5 +1,8 @@
 
-cdir=`pwd`
+#cdir=`pwd`
+#cdir=`pwd`
+cdir="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+echo $cdir
 JAVA_HOME=$cdir/gov/tools/jdk1.6.0_35/
 MAVEN_HOME=$cdir/gov/tools/bike/apache-maven-3.0.4/
 SONATYPE_HOME=$cdir/gov/tools/bike/sonatype/

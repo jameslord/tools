@@ -4,7 +4,9 @@
 if [ -z $1 ]; then
 	vim -c "set tags=tags";
 elif [ $1 = "c" ]; then
-	rm tags;
+	if [ -f tags ]; then
+		rm tags;
+	fi
 	ctags -R .
 	vim -c "set tags=tags";
 fi

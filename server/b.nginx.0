@@ -1,13 +1,23 @@
 
 if [ -z  $1 ]; then
-echo "input where you would install nginx, recomment $HOME/ins/ins_nginx"
+echo "input where you would ins-ngx nginx, recomment $HOME/ins/ins_nginx"
+echo "if download is needed, specify {d},dir"
 exit;
 fi
 
-git clone git://github.com/jameslord/libevent.git
-git clone git://github.com/jameslord/nginx.git
-cd libevent
-sleep 3 &&./autogen.sh &&  ./configure --prefix=$1 && make && make install
-cd ..
-cd nginx
-sleep 3 &&  ./auto/configure --prefix=$1 --without-http_rewrite_module && make && make install
+function ins-ngx() {
+	cd libevent
+	sleep 3 &&./autogen.sh &&  ./configure --prefix=$1 && make && make install
+	cd ..
+	cd nginx
+	sleep 3 &&  ./auto/configure --prefix=$1 --without-http_rewrite_module && make && make install
+}
+
+if [ $1 = d ] ; then
+	git clone git://github.com/jameslord/libevent.git
+	git clone git://github.com/jameslord/nginx.git
+	ins-ngx $2
+else
+	ins-ngx $1
+fi
+

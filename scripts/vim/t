@@ -4,12 +4,12 @@
 if [ -z $1 ]; then
 #	vim -c "set tags=./tags,tags";
 # just one space is needed to make this semicolon not lost, so that tag file can be find. this semicolon plays a important role here
-	vim -c "set tags=tags; ";
+	vim -c "set tags=+tags; " -S ~/.vimrc
 elif [ $1 = "c" ]; then
 	if [ -f tags ]; then
 		rm tags;
 	fi
 	ctags -R .
-	vim -c "set tags=tags; ";
+	vim -c "set tags=tags; " -S ~/.vimrc
 fi
 

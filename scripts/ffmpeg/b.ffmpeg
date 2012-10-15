@@ -1,0 +1,4 @@
+cd ffmpeg
+./configure --disable-yasm $@
+make
+make install
